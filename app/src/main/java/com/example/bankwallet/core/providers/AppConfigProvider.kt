@@ -3,6 +3,9 @@ package com.example.bankwallet.core.providers
 import com.example.bankwallet.BuildConfig
 import com.example.bankwallet.R
 import com.example.bankwallet.core.ILocalStorage
+import com.example.bankwallet.entities.Currency
+import io.horizontalsystems.marketkit.models.BlockchainType
+
 //import io.horizontalsystems.bankwallet.BuildConfig
 //import io.horizontalsystems.bankwallet.R
 //import io.horizontalsystems.bankwallet.core.ILocalStorage
@@ -106,27 +109,27 @@ class AppConfigProvider(localStorage: ILocalStorage) {
     val fiatDecimal: Int = 2
     val feeRateAdjustForCurrencies: List<String> = listOf("USD", "EUR")
 
-//    val currencies: List<Currency> = listOf(
-//        Currency("AUD", "A$", 2, R.drawable.icon_32_flag_australia),
-//        Currency("ARS", "$", 2, R.drawable.icon_32_flag_argentine),
-//        Currency("BRL", "R$", 2, R.drawable.icon_32_flag_brazil),
-//        Currency("CAD", "C$", 2, R.drawable.icon_32_flag_canada),
-//        Currency("CHF", "₣", 2, R.drawable.icon_32_flag_switzerland),
-//        Currency("CNY", "¥", 2, R.drawable.icon_32_flag_china),
-//        Currency("EUR", "€", 2, R.drawable.icon_32_flag_europe),
-//        Currency("GBP", "£", 2, R.drawable.icon_32_flag_england),
-//        Currency("HKD", "HK$", 2, R.drawable.icon_32_flag_hongkong),
-//        Currency("HUF", "Ft", 2, R.drawable.icon_32_flag_hungary),
-//        Currency("ILS", "₪", 2, R.drawable.icon_32_flag_israel),
-//        Currency("INR", "₹", 2, R.drawable.icon_32_flag_india),
-//        Currency("JPY", "¥", 2, R.drawable.icon_32_flag_japan),
-//        Currency("NOK", "kr", 2, R.drawable.icon_32_flag_norway),
-//        Currency("PHP", "₱", 2, R.drawable.icon_32_flag_philippine),
-//        Currency("RUB", "₽", 2, R.drawable.icon_32_flag_russia),
-//        Currency("SGD", "S$", 2, R.drawable.icon_32_flag_singapore),
-//        Currency("USD", "$", 2, R.drawable.icon_32_flag_usa),
-//        Currency("ZAR", "R", 2, R.drawable.icon_32_flag_south_africa),
-//    )
+    val currencies: List<Currency> = listOf(
+        Currency("AUD", "A$", 2, R.drawable.icon_32_flag_australia),
+        Currency("ARS", "$", 2, R.drawable.icon_32_flag_argentine),
+        Currency("BRL", "R$", 2, R.drawable.icon_32_flag_brazil),
+        Currency("CAD", "C$", 2, R.drawable.icon_32_flag_canada),
+        Currency("CHF", "₣", 2, R.drawable.icon_32_flag_switzerland),
+        Currency("CNY", "¥", 2, R.drawable.icon_32_flag_china),
+        Currency("EUR", "€", 2, R.drawable.icon_32_flag_europe),
+        Currency("GBP", "£", 2, R.drawable.icon_32_flag_england),
+        Currency("HKD", "HK$", 2, R.drawable.icon_32_flag_hongkong),
+        Currency("HUF", "Ft", 2, R.drawable.icon_32_flag_hungary),
+        Currency("ILS", "₪", 2, R.drawable.icon_32_flag_israel),
+        Currency("INR", "₹", 2, R.drawable.icon_32_flag_india),
+        Currency("JPY", "¥", 2, R.drawable.icon_32_flag_japan),
+        Currency("NOK", "kr", 2, R.drawable.icon_32_flag_norway),
+        Currency("PHP", "₱", 2, R.drawable.icon_32_flag_philippine),
+        Currency("RUB", "₽", 2, R.drawable.icon_32_flag_russia),
+        Currency("SGD", "S$", 2, R.drawable.icon_32_flag_singapore),
+        Currency("USD", "$", 2, R.drawable.icon_32_flag_usa),
+        Currency("ZAR", "R", 2, R.drawable.icon_32_flag_south_africa),
+    )
 
 //    val donateAddresses: Map<BlockchainType, String> by lazy {
 //        mapOf(

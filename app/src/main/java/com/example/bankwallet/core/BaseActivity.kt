@@ -19,12 +19,12 @@ abstract class BaseActivity : AppCompatActivity(), NavController.OnDestinationCh
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        window.decorView.layoutDirection = if (CoreApp.instance.isLocaleRTL()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        window.decorView.layoutDirection = if (CoreApp.instance.isLocaleRTL()) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     }
 
-//    override fun attachBaseContext(newBase: Context) {
-//        super.attachBaseContext(CoreApp.instance.localeAwareContext(newBase))
-//    }
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(CoreApp.instance.localeAwareContext(newBase))
+    }
 
     protected fun hideSoftKeyboard() {
         getSystemService(InputMethodManager::class.java).hideSoftInputFromWindow(currentFocus?.windowToken, 0)

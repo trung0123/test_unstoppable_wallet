@@ -24,6 +24,7 @@ import com.google.gson.reflect.TypeToken
 import io.horizontalsystems.core.ILockoutStorage
 import io.horizontalsystems.core.IPinSettingsStorage
 import io.horizontalsystems.core.IThirdKeyboard
+import io.horizontalsystems.marketkit.models.BlockchainType
 //import io.horizontalsystems.marketkit.models.BlockchainType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -481,14 +482,14 @@ class LocalStorageManager(
             preferences.edit().putStringSet(NON_RECOMMENDED_ACCOUNT_ALERT_DISMISSED_ACCOUNTS, value).apply()
         }
 
-//    override fun getSwapProviderId(blockchainType: BlockchainType): String? {
-//        return preferences.getString(getSwapProviderKey(blockchainType), null)
-//    }
-//
-//    override fun setSwapProviderId(blockchainType: BlockchainType, providerId: String) {
-//        preferences.edit().putString(getSwapProviderKey(blockchainType), providerId).apply()
-//    }
-//
+    override fun getSwapProviderId(blockchainType: BlockchainType): String? {
+        return preferences.getString(getSwapProviderKey(blockchainType), null)
+    }
+
+    override fun setSwapProviderId(blockchainType: BlockchainType, providerId: String) {
+        preferences.edit().putString(getSwapProviderKey(blockchainType), providerId).apply()
+    }
+
 //    override var autoLockInterval: AutoLockInterval
 //        get() = preferences.getString(APP_AUTO_LOCK_INTERVAL, null)?.let {
 //            AutoLockInterval.fromRaw(it)
@@ -512,9 +513,9 @@ class LocalStorageManager(
             preferences.edit().putBoolean(RBF_ENABLED, value).apply()
         }
 
-//    private fun getSwapProviderKey(blockchainType: BlockchainType): String {
-//        return SWAP_PROVIDER + blockchainType.uid
-//    }
+    private fun getSwapProviderKey(blockchainType: BlockchainType): String {
+        return SWAP_PROVIDER + blockchainType.uid
+    }
 
     override var statsLastSyncTime: Long
         get() = preferences.getLong(STATS_SYNC_TIME, 0)

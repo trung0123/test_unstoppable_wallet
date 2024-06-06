@@ -123,18 +123,46 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
+    packagingOptions {
+        resources {
+            pickFirsts += ['META-INF/atomicfu.kotlin_module']
+            excludes += ['META-INF/INDEX.LIST', 'META-INF/DEPENDENCIES', 'META-INF/LICENSE.md', 'META-INF/NOTICE.md']
+        }
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
     kotlinOptions {
         jvmTarget = '17'
     }
+
     buildFeatures {
         compose true
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion '1.4.0'
     }
+
     packaging {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    configurations.all { c ->
+        c.resolutionStrategy.dependencySubstitution {
+            substitute module('org.bouncycastle:bcprov-jdk15to18:1.68') using module('org.bouncycastle:bcprov-jdk15on:1.65')
+            substitute module('com.google.protobuf:protobuf-java:3.6.1') using module('com.google.protobuf:protobuf-javalite:3.21.1')
+            substitute module('net.jcip:jcip-annotations:1.0') using module('com.github.stephenc.jcip:jcip-annotations:1.0-1')
+
+            substitute module('com.tinder.scarlet:scarlet:0.1.12') using module('com.github.WalletConnect.Scarlet:scarlet:1.0.0')
+            substitute module('com.tinder.scarlet:websocket-okhttp:0.1.12') using module('com.github.WalletConnect.Scarlet:websocket-okhttp:1.0.0')
+            substitute module('com.tinder.scarlet:stream-adapter-rxjava2:0.1.12') using module('com.github.WalletConnect.Scarlet:stream-adapter-rxjava2:1.0.0')
+            substitute module('com.tinder.scarlet:message-adapter-gson:0.1.12') using module('com.github.WalletConnect.Scarlet:message-adapter-gson:1.0.0')
+            substitute module('com.tinder.scarlet:lifecycle-android:0.1.12') using module('com.github.WalletConnect.Scarlet:lifecycle-android:1.0.0')
         }
     }
 }
@@ -219,14 +247,14 @@ dependencies {
 //    debugImplementation leakCanary
 
     // Wallet kits
-//    implementation 'com.github.horizontalsystems:ton-kit-kmm:51bdea4'
-//    implementation 'com.github.horizontalsystems:bitcoin-kit-android:80fd413'
-//    implementation 'com.github.horizontalsystems:ethereum-kit-android:f4957a9'
-//    implementation 'com.github.horizontalsystems:blockchain-fee-rate-kit-android:1d3bd49'
-//    implementation 'com.github.horizontalsystems:binance-chain-kit-android:c1509a2'
-//    implementation 'com.github.horizontalsystems:market-kit-android:a0361bf'
-//    implementation 'com.github.horizontalsystems:solana-kit-android:d8bb9f2'
-//    implementation 'com.github.horizontalsystems:tron-kit-android:dc3dca7'
+    implementation 'com.github.horizontalsystems:ton-kit-kmm:51bdea4'
+    implementation 'com.github.horizontalsystems:bitcoin-kit-android:80fd413'
+    implementation 'com.github.horizontalsystems:ethereum-kit-android:f4957a9'
+    implementation 'com.github.horizontalsystems:blockchain-fee-rate-kit-android:1d3bd49'
+    implementation 'com.github.horizontalsystems:binance-chain-kit-android:c1509a2'
+    implementation 'com.github.horizontalsystems:market-kit-android:a0361bf'
+    implementation 'com.github.horizontalsystems:solana-kit-android:d8bb9f2'
+    implementation 'com.github.horizontalsystems:tron-kit-android:dc3dca7'
     // Zcash SDK
 //    implementation "cash.z.ecc.android:zcash-android-sdk:2.0.1"
 //    implementation("io.github.binance:binance-connector-java:3.0.0rc2") {

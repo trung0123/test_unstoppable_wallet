@@ -5,6 +5,8 @@ import com.example.bankwallet.core.IWalletStorage
 import com.example.bankwallet.entities.Account
 import com.example.bankwallet.entities.EnabledWallet
 import com.example.bankwallet.entities.Wallet
+import io.horizontalsystems.marketkit.models.TokenQuery
+
 //import io.horizontalsystems.bankwallet.core.IEnabledWalletStorage
 //import io.horizontalsystems.bankwallet.core.IWalletStorage
 //import io.horizontalsystems.bankwallet.core.customCoinUid
@@ -20,13 +22,13 @@ class WalletStorage(
 ) : IWalletStorage {
 
     override fun wallets(account: Account): List<Wallet> {
-//        val enabledWallets = storage.enabledWallets(account.id)
-//
-//        val queries = enabledWallets.mapNotNull { TokenQuery.fromId(it.tokenQueryId) }
-//        val tokens = marketKit.tokens(queries)
-//
-//        val blockchainUids = queries.map { it.blockchainType.uid }
-//        val blockchains = marketKit.blockchains(blockchainUids)
+        val enabledWallets = storage.enabledWallets(account.id)
+
+        val queries = enabledWallets.mapNotNull { TokenQuery.fromId(it.tokenQueryId) }
+        val tokens = marketKit.tokens(queries)
+
+        val blockchainUids = queries.map { it.blockchainType.uid }
+        val blockchains = marketKit.blockchains(blockchainUids)
 
 //        return enabledWallets.mapNotNull { enabledWallet ->
 //            val tokenQuery = TokenQuery.fromId(enabledWallet.tokenQueryId) ?: return@mapNotNull null
@@ -59,9 +61,9 @@ class WalletStorage(
 
         wallets.forEachIndexed { index, wallet ->
 
-//            enabledWallets.add(
-//                enabledWallet(wallet, index)
-//            )
+            enabledWallets.add(
+                enabledWallet(wallet, index)
+            )
         }
 
         storage.save(enabledWallets)
@@ -79,14 +81,14 @@ class WalletStorage(
         storage.deleteAll()
     }
 
-//    private fun enabledWallet(wallet: Wallet, index: Int? = null): EnabledWallet {
-//        return EnabledWallet(
-//            wallet.token.tokenQuery.id,
-//            wallet.account.id,
-//            index,
-//            wallet.coin.name,
-//            wallet.coin.code,
-//            wallet.decimal
-//        )
-//    }
+    private fun enabledWallet(wallet: Wallet, index: Int? = null): EnabledWallet {
+        return EnabledWallet(
+            wallet.token.tokenQuery.id,
+            wallet.account.id,
+            index,
+            wallet.coin.name,
+            wallet.coin.code,
+            wallet.decimal
+        )
+    }
 }

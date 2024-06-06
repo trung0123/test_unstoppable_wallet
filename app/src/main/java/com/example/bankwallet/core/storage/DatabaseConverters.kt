@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.example.bankwallet.core.App
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import io.horizontalsystems.marketkit.models.BlockchainType
 //import io.horizontalsystems.bankwallet.core.App
 //import io.horizontalsystems.bankwallet.core.providers.CexDepositNetworkRaw
 //import io.horizontalsystems.bankwallet.core.providers.CexWithdrawNetworkRaw
@@ -78,16 +79,16 @@ class DatabaseConverters {
         return Date(timestamp)
     }
 
-//    @TypeConverter
-//    fun fromBlockchainType(blockchainType: BlockchainType): String {
-//        return blockchainType.uid
-//    }
-//
-//    @TypeConverter
-//    fun toBlockchainType(string: String): BlockchainType {
-//        return BlockchainType.fromUid(string)
-//    }
-//
+    @TypeConverter
+    fun fromBlockchainType(blockchainType: BlockchainType): String {
+        return blockchainType.uid
+    }
+
+    @TypeConverter
+    fun toBlockchainType(string: String): BlockchainType {
+        return BlockchainType.fromUid(string)
+    }
+
 //    @TypeConverter
 //    fun fromNftUid(nftUid: NftUid): String {
 //        return nftUid.uid

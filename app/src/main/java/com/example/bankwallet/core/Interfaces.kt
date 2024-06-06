@@ -8,6 +8,10 @@ import com.example.bankwallet.entities.AccountType
 import com.example.bankwallet.entities.EnabledWallet
 import com.example.bankwallet.entities.Wallet
 import com.google.gson.JsonObject
+import io.horizontalsystems.binancechainkit.BinanceChainKit
+import io.horizontalsystems.marketkit.models.BlockchainType
+import io.horizontalsystems.marketkit.models.Token
+import io.horizontalsystems.marketkit.models.TokenQuery
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -18,11 +22,11 @@ import java.math.BigDecimal
 import java.util.Date
 
 interface IAdapterManager {
-//    val adaptersReadyObservable: Flowable<Map<Wallet, IAdapter>>
+    val adaptersReadyObservable: Flowable<Map<Wallet, IAdapter>>
     fun startAdapterManager()
     fun refresh()
     fun getAdapterForWallet(wallet: Wallet): IAdapter?
-//    fun getAdapterForToken(token: Token): IAdapter?
+    fun getAdapterForToken(token: Token): IAdapter?
     fun getBalanceAdapterForWallet(wallet: Wallet): IBalanceAdapter?
     fun getReceiveAdapterForWallet(wallet: Wallet): IReceiveAdapter?
     fun refreshAdapters(wallets: List<Wallet>)
@@ -83,8 +87,8 @@ interface ILocalStorage {
 
     val utxoExpertModeEnabledFlow: StateFlow<Boolean>
 
-//    fun getSwapProviderId(blockchainType: BlockchainType): String?
-//    fun setSwapProviderId(blockchainType: BlockchainType, providerId: String)
+    fun getSwapProviderId(blockchainType: BlockchainType): String?
+    fun setSwapProviderId(blockchainType: BlockchainType, providerId: String)
 
     fun clear()
 }
@@ -201,10 +205,10 @@ sealed class AdapterState {
 }
 
 interface IBinanceKitManager {
-//    val binanceKit: BinanceChainKit?
+    val binanceKit: BinanceChainKit?
     val statusInfo: Map<String, Any>?
 
-//    fun binanceKit(wallet: Wallet): BinanceChainKit
+    fun binanceKit(wallet: Wallet): BinanceChainKit
     fun unlink(account: Account)
 }
 
@@ -215,7 +219,7 @@ interface ITransactionsAdapter {
 
 //    val lastBlockInfo: LastBlockInfo?
     val lastBlockUpdatedFlowable: Flowable<Unit>
-//    val additionalTokenQueries: List<TokenQuery> get() = listOf()
+    val additionalTokenQueries: List<TokenQuery> get() = listOf()
 
 //    fun getTransactionsAsync(
 //        from: TransactionRecord?,
@@ -473,7 +477,7 @@ interface IRateAppManager {
 }
 
 interface ICoinManager {
-//    fun getToken(query: TokenQuery): Token?
+    fun getToken(query: TokenQuery): Token?
 }
 
 interface ITermsManager {

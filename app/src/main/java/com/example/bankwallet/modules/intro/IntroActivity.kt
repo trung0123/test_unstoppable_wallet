@@ -39,7 +39,10 @@ import com.example.bankwallet.R
 import com.example.bankwallet.core.App
 import com.example.bankwallet.core.BaseActivity
 import com.example.bankwallet.ui.compose.ComposeAppTheme
+import com.example.bankwallet.ui.compose.components.ButtonPrimaryYellow
+import com.example.bankwallet.ui.compose.components.body_grey
 import com.example.bankwallet.ui.compose.components.title3_leah
+import kotlinx.coroutines.launch
 
 class IntroActivity : BaseActivity() {
 
@@ -145,19 +148,49 @@ private fun StaticContent(
         Column(
             modifier = Modifier
                 .height(120.dp)
-                .fillMaxSize(),
+                .fillMaxWidth(),
         ) {
             val title = viewModel.slides[pagerState.currentPage].title
-            Crossfade(targetState = title, label = "") { titleRes ->
+            Crossfade(targetState = title) { titleRes ->
                 title3_leah(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 24.dp),
-                    text = stringResource(id = titleRes),
+                    text = stringResource(titleRes),
                     textAlign = TextAlign.Center
                 )
             }
         }
+        Spacer(Modifier.height(16.dp))
+        val subtitle = viewModel.slides[pagerState.currentPage].subTitle
+        Crossfade(targetState = subtitle) { subtitleRes ->
+            body_grey(
+                text = stringResource(subtitleRes),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 48.dp),
+                textAlign = TextAlign.Center
+            )
+        }
+        Spacer(Modifier.weight(2f))
+        ButtonPrimaryYellow(
+            modifier = Modifier
+                .padding(horizontal = 24.dp)
+                .fillMaxWidth(),
+            title = stringResource(R.string.Button_Next),
+            onClick = {
+                if (pagerState.currentPage + 1 < pageCount) {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    }
+                } else {
+                    viewModel.onStartClicked()
+//                        MainModule.start(context)
+                    closeActivity()
+
+                }
+            })
+        Spacer(Modifier.height(60.dp))
     }
 }
 
